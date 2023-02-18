@@ -1,15 +1,15 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
       //     "TechGen",
       //     style: TextStyle(color: Color.fromARGB(221, 45, 43, 43)),
       //   ),
-      //   backgroundColor: const Color.fromARGB(255, 182, 177, 177),
+      //   backgroundColor: Color.fromARGB(255, 182, 177, 177),
       //   elevation: 0,
       // ),
       body: SingleChildScrollView(
@@ -32,13 +32,13 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Container(
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 182, 177, 177),
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(30),
                 ),
               ),
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   const SizedBox(height: 60),
@@ -50,17 +50,19 @@ class _LoginPageState extends State<LoginPage> {
                       // fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: height * 0.013),
+                  const SizedBox(height: 20),
                   const Text(
-                    "Login to your account",
+                    "Create an account",
                     style: TextStyle(
                       fontSize: 30,
                       color: Color.fromRGBO(0, 0, 0, 0.751),
                     ),
                   ),
-                  SizedBox(height: height * 0.17),
+                  const SizedBox(height: 150),
                   Container(
-                    padding: const EdgeInsets.all(3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -83,9 +85,39 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: height * 0.013),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: const EdgeInsets.all(3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(15),
+                      ),
+                    ),
+                    child: Column(
+                      children: const [
+                        TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          cursorColor: Colors.blueGrey,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: Icon(
+                              Icons.alternate_email_rounded,
+                              color: Colors.black45,
+                            ),
+                            label: Text("Email-ID"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -93,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: const [
                         TextField(
+                          obscureText: true,
                           cursorColor: Colors.blueGrey,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -101,6 +134,34 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.black45,
                             ),
                             label: Text("Password"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    child: Column(
+                      children: const [
+                        TextField(
+                          obscureText: true,
+                          cursorColor: Colors.blueGrey,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: Icon(
+                              Icons.password_rounded,
+                              color: Colors.black45,
+                            ),
+                            label: Text("Confirm Password"),
                           ),
                         ),
                       ],
@@ -115,13 +176,13 @@ class _LoginPageState extends State<LoginPage> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: const [
                             Text(
-                              "Don't have an account?",
+                              "Already have an account?",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 77, 75, 75),
                               ),
                             ),
                             Text(
-                              "Register Here",
+                              "Login Here",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 77, 75, 75),
                               ),
@@ -133,19 +194,20 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: height * 0.052),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.32),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.29),
                     child: Container(
                       width: double.maxFinite,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        // borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TextButton(
                         onPressed: () {},
-                        child: Text(
-                          "Login",
+                        child: const Text(
+                          "Register",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.black54,

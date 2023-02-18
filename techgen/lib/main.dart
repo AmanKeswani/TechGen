@@ -1,149 +1,123 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 void main() => runApp(
       const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginPage(),
+        home: HomePage(),
       ),
     );
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Home',
+    ),
+    Text(
+      'Search',
+    ),
+    Text(
+      'Search',
+    ),
+    Text(
+      'Profile',
+    ),
+    Text(
+      'Extra',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(243, 243, 243, 1),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 30),
-        title: Text(
-          "TechGen",
-          style: TextStyle(color: Color.fromARGB(221, 45, 43, 43)),
-        ),
-        backgroundColor: Color.fromRGBO(243, 243, 243, 1),
         elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          "Home Page",
+          style: TextStyle(
+            color: Colors.black54,
+            fontSize: 25,
+            fontFamily: "SF Pro Display",
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.logout),
+            color: Colors.black54,
+            iconSize: 25,
+          ),
+        ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(243, 243, 243, 1),
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(30),
-                ),
-              ),
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  SizedBox(height: 60),
-                  Text(
-                    "Welcome to TechGen",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 20,
-                      // fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Login to your account",
-                    style: TextStyle(
-                        fontSize: 30, color: Color.fromRGBO(0, 0, 0, 0.751)),
-                  ),
-                  // SizedBox(height: 100),
-                ],
-              ),
-            ),
-            SizedBox(height: 150),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                padding: EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                child: Column(
-                  children: [
-                    TextField(
-                      cursorColor: Colors.blueGrey,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.account_circle_rounded,
-                          color: Colors.black45,
-                        ),
-                        label: Text("Username"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                padding: EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                child: Column(
-                  children: [
-                    TextField(
-                      cursorColor: Colors.blueGrey,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.password_rounded,
-                          color: Colors.black45,
-                        ),
-                        label: Text("Password"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Don't have an account?",
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Text(
-                          "Register Here",
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
             )
           ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: Color.fromARGB(255, 215, 47, 47),
+              hoverColor: Color.fromARGB(255, 63, 6, 161),
+              gap: 10,
+              activeColor: Colors.black,
+              iconSize: 30,
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              duration: Duration(milliseconds: 1000),
+              tabBackgroundColor: Color.fromARGB(255, 9, 207, 124),
+              color: Colors.black,
+              tabs: [
+                GButton(
+                  icon: LineIcons.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: LineIcons.heart,
+                  text: 'Likes',
+                ),
+                GButton(
+                  icon: LineIcons.search,
+                  text: 'Search',
+                ),
+                GButton(
+                  icon: LineIcons.user,
+                  text: 'Profile',
+                ),
+                GButton(
+                  icon: LineIcons.alternateArrowCircleUp,
+                  text: 'Extra',
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
+          ),
         ),
       ),
     );
