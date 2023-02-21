@@ -3,6 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:techgen/views/HomePageNav/HomePageContent.dart';
+import 'package:techgen/views/HomePageNav/ProfileContent.dart';
+import 'package:techgen/views/HomePageNav/UpcomingEventsContent.dart';
+import 'package:techgen/views/HomePageNav/YourTicketsContent.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,10 +48,19 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
-  @override
-  void initState() {
-    // String _title = 'abc';
-    super.initState();
+  Widget bodyFunction() {
+    switch (_selectedIndex) {
+      case 0:
+        return const HomePageContent();
+      case 1:
+        return const YourTicketsContent();
+      case 2:
+        return const UpcomingEventContent();
+      case 3:
+        return const ProfilePageContent();
+      default:
+        return const Text("Default");
+    }
   }
 
   @override
@@ -67,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Container(color: Colors.red),
+      body: bodyFunction(),
       // body: Center(
       // child: _widgetOptions.elementAt(_selectedIndex),
       // ),
