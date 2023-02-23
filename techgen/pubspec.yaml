@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore: ^4.4.2
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
+  flutter_custom_clippers: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -64,8 +65,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/images/one.jpg
+  assets:
+    - lib/assets/splash_image.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
