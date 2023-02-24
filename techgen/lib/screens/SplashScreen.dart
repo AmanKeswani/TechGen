@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
+import 'package:techgen/constants/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -62,6 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 5),
       () {
         // Add Navigator for new page
+        Navigator.pushNamed(context, HomePageRoute);
       },
     );
   }

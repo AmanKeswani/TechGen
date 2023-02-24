@@ -3,12 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:techgen/constants/routes.dart';
 import 'package:techgen/screens/SplashScreen.dart';
+import 'package:techgen/screens/user/YourEventsNav.dart';
 
 void main() => runApp(
-      const MaterialApp(
+      MaterialApp(
+        routes: {
+          HomePageRoute: (context) => const HomePage(),
+          YourEventsRoute: (context) => const YourEventsNav(),
+        },
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: SplashScreen(),
       ),
     );
 
@@ -33,6 +39,9 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: GNav(
         backgroundColor: Color.fromARGB(255, 234, 230, 230),
         padding: EdgeInsets.all(10),
+        tabMargin: EdgeInsets.symmetric(
+          vertical: 10,
+        ),
         color: Color(0xFF1E3D33),
         tabBackgroundColor: Color(0xFFA3DCCA),
         activeColor: Color(0xFF1E3D33),
@@ -90,20 +99,38 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          // SizedBox(height: 10),
           Expanded(
               child: Container(
-            margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+            width: _width,
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
               ),
               color: Colors.red,
-              border: Border(),
             ),
-            child: ListWheelScrollView(
-              itemExtent: 1,
-              children: [],
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ListWheelScrollView(
+                itemExtent: 150,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Event Name:",
+                          style: TextStyle(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           )),
         ],
