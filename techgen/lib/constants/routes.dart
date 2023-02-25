@@ -2,3 +2,5 @@
 
 const String HomePageRoute = '/HomePage/';
 const String YourEventsRoute = '/YourEventsnav/';
+const String LoginPageRoute = '/LoginPage/';
+const String RegisterPageRoute = '/RegisterPage/';

@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 5),
       () {
         // Add Navigator for new page
-        Navigator.pushNamed(context, HomePageRoute);
+        Navigator.pushNamed(context, LoginPageRoute);
       },
     );
   }
