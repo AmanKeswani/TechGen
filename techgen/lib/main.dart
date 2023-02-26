@@ -8,7 +8,7 @@ import 'package:techgen/screens/Auth/LoginPage.dart';
 import 'package:techgen/screens/Auth/RegisterPage.dart';
 import 'package:techgen/screens/SplashScreen.dart';
 import 'package:techgen/screens/user/HomePage.dart';
-import 'package:techgen/screens/user/YourEventsNav.dart';
+import 'package:techgen/screens/user/UpcomingEventsNav.dart';
 
 void main() => runApp(
       MaterialApp(
