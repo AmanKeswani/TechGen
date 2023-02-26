@@ -62,8 +62,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 5),
       () {
-        // Add Navigator for new page
-        Navigator.pushNamed(context, LoginPageRoute);
+        Navigator.pushNamed(
+          context,
+          HomePageRoute,
+        );
       },
     );
   }

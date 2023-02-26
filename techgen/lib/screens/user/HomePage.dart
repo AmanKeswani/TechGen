@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:techgen/screens/user/HomePageNav.dart';
+import 'package:techgen/screens/user/YourEventsNav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,10 +13,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _index = 0;
+
+  Widget tabChangeBodyFunction() {
+    switch (_index) {
+      case 0:
+        return const HomePageNav();
+      case 1:
+        return const YourEventsNav();
+      default:
+        return const HomePageNav();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -22,6 +35,12 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
       ),
       bottomNavigationBar: GNav(
+        onTabChange: (int index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        gap: 7,
         backgroundColor: const Color.fromARGB(255, 234, 230, 230),
         padding: const EdgeInsets.all(10),
         tabMargin: const EdgeInsets.symmetric(
@@ -34,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           color: Color(0xFF1E3D33),
           fontSize: 20,
         ),
-        iconSize: 40,
+        iconSize: 30,
         tabs: [
           GButton(
             text: "Home Page",
@@ -54,219 +73,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            height: height * 0.21,
-            width: width,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-              image: DecorationImage(
-                  image: AssetImage(
-                    'lib/assets/home_bg_image.jpeg',
-                  ),
-                  fit: BoxFit.cover),
-            ),
-            child: const Center(
-              child: Text(
-                "Event Updates",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white70,
-                ),
-              ),
-            ),
-          ),
-          // SizedBox(height: 10),
-          Expanded(
-              child: Container(
-            width: width,
-            margin: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListWheelScrollView(
-                overAndUnderCenterOpacity: 0.9,
-                physics: const FixedExtentScrollPhysics(),
-                diameterRatio: 6,
-                squeeze: 1.5,
-                itemExtent: 200,
-                children: [
-                  Material(
-                    // elevation: 10,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        color: Colors.amber,
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Event Name:",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Event Description",
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded),
-                                iconSize: 35,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Material(
-                    // elevation: 10,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        color: Colors.amber,
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Event Name:",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Event Description",
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded),
-                                iconSize: 35,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Material(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        color: Colors.amber,
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Event Name:",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Event Description",
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded),
-                                iconSize: 35,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )),
-        ],
-      ),
+      body: tabChangeBodyFunction(),
     );
   }
 }

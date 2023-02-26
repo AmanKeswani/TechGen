@@ -14,7 +14,6 @@ void main() => runApp(
       MaterialApp(
         routes: {
           HomePageRoute: (context) => const HomePage(),
-          YourEventsRoute: (context) => const YourEventsNav(),
           LoginPageRoute: (context) => const LoginPage(),
           RegisterPageRoute: (context) => const RegsiterPage(),
         },
