@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "830804675662",
+    "project_id": "techgen-android-ios-firebase",
+    "storage_bucket": "techgen-android-ios-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830804675662:android:7637bddac96b413405471f",
+        "android_client_info": {
+          "package_name": "com.example.techgen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830804675662-v541ekb0t1oej3fq6gniqtv2tg85rskr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVyp3B-UF_LuPoHJ11RFVf2yWM9HFv3jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830804675662-v541ekb0t1oej3fq6gniqtv2tg85rskr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
