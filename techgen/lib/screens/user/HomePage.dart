@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:techgen/screens/user/HomePageNav.dart';
+import 'package:techgen/screens/user/ProfileNav.dart';
 import 'package:techgen/screens/user/UpcomingEventsNav.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,6 +22,8 @@ class _HomePageState extends State<HomePage> {
         return const HomePageNav();
       case 2:
         return const UpcomingEventsNav();
+      case 3:
+        return const ProfileNav();
       default:
         return const HomePageNav();
     }
