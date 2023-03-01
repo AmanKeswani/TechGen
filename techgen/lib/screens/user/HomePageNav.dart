@@ -3,6 +3,7 @@
 // import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:techgen/constants/images.dart';
 
 class HomePageNav extends StatefulWidget {
   const HomePageNav({super.key});
@@ -31,7 +32,7 @@ class _HomePageNavState extends State<HomePageNav> {
             ),
             image: DecorationImage(
                 image: AssetImage(
-                  'lib/assets/home_bg_image.jpeg',
+                  homeScreenImage,
                 ),
                 fit: BoxFit.cover),
           ),

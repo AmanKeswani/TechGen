@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, unused_local_variable, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:techgen/constants/colors.dart';
 
 class UpcomingEventsNav extends StatefulWidget {
   const UpcomingEventsNav({super.key});
@@ -23,7 +24,7 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                 "Upcoming Events",
                 style: TextStyle(
                   fontSize: 30,
-                  color: Color(0xFF1E3D33),
+                  color: titleColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -37,7 +38,7 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFA3DCCA),
+                  color: tileColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,9 +53,10 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                             Text(
                               "Event Name",
                               style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF0A261D),
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 20,
+                                color: titleColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             SizedBox(
                               height: height * 0.01,
@@ -62,9 +64,10 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                             Text(
                               "Event description",
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xFF0A261D),
-                                  fontWeight: FontWeight.w400),
+                                fontSize: 12,
+                                color: titleColor,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ],
                         ),
@@ -83,13 +86,14 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFF1E3D33),
+                            color: titleColor,
                           ),
                           child: TextButton(
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.02,
-                                  vertical: height * 0.0115),
+                                horizontal: width * 0.02,
+                                vertical: height * 0.0115,
+                              ),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {},
@@ -118,7 +122,7 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFA3DCCA),
+                  color: tileColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,7 +138,7 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                               "Event Name",
                               style: TextStyle(
                                   fontSize: 20,
-                                  color: Color(0xFF0A261D),
+                                  color: titleColor,
                                   fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
@@ -144,7 +148,7 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                               "Event description",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Color(0xFF0A261D),
+                                  color: titleColor,
                                   fontWeight: FontWeight.w400),
                             ),
                           ],
@@ -164,13 +168,14 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFF1E3D33),
+                            color: titleColor,
                           ),
                           child: TextButton(
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.02,
-                                  vertical: height * 0.0115),
+                                horizontal: width * 0.02,
+                                vertical: height * 0.0115,
+                              ),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {},
@@ -199,7 +204,7 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFA3DCCA),
+                  color: tileColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -214,9 +219,10 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                             Text(
                               "Event Name",
                               style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF0A261D),
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 20,
+                                color: titleColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             SizedBox(
                               height: height * 0.01,
@@ -224,9 +230,10 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                             Text(
                               "Event description",
                               style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xFF0A261D),
-                                  fontWeight: FontWeight.w400),
+                                fontSize: 12,
+                                color: titleColor,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ],
                         ),
@@ -245,13 +252,14 @@ class _UpcomingEventsNavState extends State<UpcomingEventsNav> {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFF1E3D33),
+                            color: titleColor,
                           ),
                           child: TextButton(
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.02,
-                                  vertical: height * 0.0115),
+                                horizontal: width * 0.02,
+                                vertical: height * 0.0115,
+                              ),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {},

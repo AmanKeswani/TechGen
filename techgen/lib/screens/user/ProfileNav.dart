@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:techgen/constants/colors.dart';
 
 class ProfileNav extends StatefulWidget {
   const ProfileNav({super.key});
@@ -20,7 +21,7 @@ class _ProfileNavState extends State<ProfileNav> {
           height: height * 0.3,
           width: width,
           decoration: const BoxDecoration(
-            color: Color(0xFFA3DCCA),
+            color: tileColor,
           ),
         ),
         Center(

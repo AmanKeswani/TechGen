@@ -15,7 +15,7 @@ void main() => runApp(
         routes: {
           HomePageRoute: (context) => const HomePage(),
           LoginPageRoute: (context) => const LoginPage(),
-          RegisterPageRoute: (context) => const RegsiterPage(),
+          RegisterPageRoute: (context) => const RegisterPage(),
         },
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),

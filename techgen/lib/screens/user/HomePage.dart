@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:techgen/constants/colors.dart';
 import 'package:techgen/screens/user/HomePageNav.dart';
 import 'package:techgen/screens/user/ProfileNav.dart';
 import 'package:techgen/screens/user/UpcomingEventsNav.dart';
@@ -44,16 +45,16 @@ class _HomePageState extends State<HomePage> {
           });
         },
         gap: 7,
-        backgroundColor: const Color.fromARGB(255, 234, 230, 230),
+        backgroundColor: Colors.white,
         padding: const EdgeInsets.all(10),
         tabMargin: const EdgeInsets.symmetric(
           vertical: 10,
         ),
-        color: const Color(0xFF1E3D33),
-        tabBackgroundColor: const Color(0xFFA3DCCA),
-        activeColor: const Color(0xFF1E3D33),
+        color: titleColor,
+        tabBackgroundColor: tileColor,
+        activeColor: titleColor,
         textStyle: const TextStyle(
-          color: Color(0xFF1E3D33),
+          color: titleColor,
           fontSize: 20,
         ),
         iconSize: 30,

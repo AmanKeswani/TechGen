@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:techgen/constants/routes.dart';
+import 'package:techgen/constants/images.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             opacity: 50,
-            image: AssetImage("lib/assets/splash_image.jpeg"),
+            image: AssetImage(splashImage),
             fit: BoxFit.cover,
           ),
         ),
@@ -51,7 +52,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 )
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
@@ -64,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         Navigator.pushNamed(
           context,
-          HomePageRoute,
+          RegisterPageRoute,
         );
       },
     );

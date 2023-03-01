@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:techgen/constants/routes.dart';
+import 'package:techgen/constants/colors.dart';
 
-class RegsiterPage extends StatefulWidget {
-  const RegsiterPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<RegsiterPage> createState() => _RegsiterPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegsiterPageState extends State<RegsiterPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -26,7 +27,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
             Text(
               "Welcome to TechGen",
               style: TextStyle(
-                color: const Color(0xFF54A48B),
+                color: tileColor,
                 fontSize: width * 0.055,
                 fontWeight: FontWeight.w300,
               ),
@@ -37,7 +38,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
             Text(
               "Create account",
               style: TextStyle(
-                color: const Color(0xFF1E3D33),
+                color: titleColor,
                 fontSize: width * 0.08,
                 fontWeight: FontWeight.w500,
               ),
@@ -51,13 +52,15 @@ class _RegsiterPageState extends State<RegsiterPage> {
               ),
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color(0xFFCEEDE3),
+                    color: textBoxColor,
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     )),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.01, vertical: height * 0.006),
+                    horizontal: width * 0.01,
+                    vertical: height * 0.006,
+                  ),
                   child: TextField(
                     decoration: InputDecoration(
                       prefixIconConstraints: const BoxConstraints(
@@ -120,7 +123,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 17,
-                            color: Color(0xFF0A261D),
+                            color: titleColor,
                           ),
                         ),
                       ),
@@ -142,7 +145,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
-                  color: Color(0xFF1E3D33),
+                  color: titleColor,
                 ),
                 child: const Text(
                   "Register",
@@ -159,7 +162,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
             const Text(
               "OR",
               style: TextStyle(
-                color: Color(0xFF1E3D33),
+                color: titleColor,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -176,7 +179,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
-                  color: Color(0xFFCEEDE3),
+                  color: textBoxColor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -184,7 +187,7 @@ class _RegsiterPageState extends State<RegsiterPage> {
                     Text(
                       "Continue with Google",
                       style: TextStyle(
-                        color: Color(0xFF54A48B),
+                        color: titleColor,
                         fontSize: 23,
                         fontWeight: FontWeight.w300,
                       ),

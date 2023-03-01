@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
+import 'package:techgen/constants/colors.dart';
 import 'package:techgen/constants/routes.dart';
 
 class LoginPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               "Login to your account",
               style: TextStyle(
-                color: const Color(0xFF1E3D33),
+                color: titleColor,
                 fontSize: width * 0.08,
                 fontWeight: FontWeight.w500,
               ),
@@ -50,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color(0xFFCEEDE3),
+                    color: textBoxColor,
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     )),
@@ -82,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color(0xFFCEEDE3),
+                    color: textBoxColor,
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     )),
@@ -146,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 17,
-                            color: Color(0xFF0A261D),
+                            color: titleColor,
                           ),
                         ),
                       ),
@@ -168,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
-                  color: Color(0xFF1E3D33),
+                  color: titleColor,
                 ),
                 child: const Text(
                   "Login",
