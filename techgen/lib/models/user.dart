@@ -1,54 +1,55 @@
-import 'package:techgen/models/events.dart';
-import 'package:techgen/models/teams.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:techgen/constants/dbConstants.dart';
 
 class User {
-  final int id;
+  final String id;
   final String firstName;
   final String lastName;
-  final int phoneNumber;
+  final String userName;
+  final String phoneNumber;
   final String emailID;
+  final String password;
   final String collegeName;
-  final List<User> friends;
   final bool admin;
   final bool head;
   final bool volunteer;
-  final List<Event> eventList;
-  final List<Event> registeredEvents;
   final int diamonds;
-  final String password;
-  String username;
+  final List<String> friendsList;
+  final List<String> eventList;
+  final List<String> registeredEvents;
 
   User({
     required this.id,
     required this.firstName,
     required this.lastName,
+    required this.userName,
     required this.phoneNumber,
     required this.emailID,
+    required this.password,
     required this.collegeName,
-    required this.friends,
     required this.admin,
     required this.head,
     required this.volunteer,
+    required this.diamonds,
+    required this.friendsList,
     required this.eventList,
     required this.registeredEvents,
-    required this.diamonds,
-    required this.password,
-    required this.username,
   });
 
-  void addFriend({
-    required String uid,
-  }) {
-    // Add friend here and update on firebase
-  }
-
-  void removeFriend({
-    required String uid,
-  }) {
-    // Remove friend and update on firebase
-  }
-
-  void createTeam({required Team team}) {
-    //
-  }
+  User.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.id,
+        firstName = snapshot.data()[firstNameUser],
+        lastName = snapshot.data()[lastNameUser],
+        userName = snapshot.data()[lastNameUser],
+        phoneNumber = snapshot.data()[lastNameUser],
+        emailID = snapshot.data()[lastNameUser],
+        password = snapshot.data()[lastNameUser],
+        collegeName = snapshot.data()[lastNameUser],
+        admin = snapshot.data()[lastNameUser],
+        head = snapshot.data()[lastNameUser],
+        volunteer = snapshot.data()[lastNameUser],
+        diamonds = snapshot.data()[lastNameUser],
+        friendsList = snapshot.data()[lastNameUser],
+        eventList = snapshot.data()[lastNameUser],
+        registeredEvents = snapshot.data()[lastNameUser];
 }

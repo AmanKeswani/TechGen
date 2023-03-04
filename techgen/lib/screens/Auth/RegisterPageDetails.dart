@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:techgen/constants/colors.dart';
 import 'package:techgen/constants/routes.dart';
+import 'package:techgen/database/CloudUsers.dart';
+import 'package:techgen/models/user.dart';
 
 class RegisterPageDetails extends StatefulWidget {
   const RegisterPageDetails({super.key});
@@ -14,13 +16,33 @@ class RegisterPageDetails extends StatefulWidget {
 var _height;
 var _width;
 
-late final TextEditingController _phoneController;
+late final _firstNameController;
+late final _lastNameController;
+late final _emailController;
+late final _passwordController;
+late final _confirmPasswordController;
+late final _collegeController;
+late final _courseController;
+late final _phoneNumberController;
+
+late final CloudUsers _usersInstance;
 
 class _RegisterPageDetailsState extends State<RegisterPageDetails> {
   @override
   void initState() {
-    _phoneController = TextEditingController();
-    _phoneController.text = '+91';
+    // Controllers
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
+    _collegeController = TextEditingController();
+    _courseController = TextEditingController();
+    _phoneNumberController = TextEditingController();
+
+    _phoneNumberController.text = '+91';
+    _usersInstance = CloudUsers();
+
     super.initState();
   }
 
@@ -30,6 +52,7 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
     final width = MediaQuery.of(context).size.width;
     _height = height;
     _width = width;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -71,21 +94,44 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                     Row(
                       children: [
                         Flexible(
-                          child: _textBox(label: "First Name"),
+                          child: _textBox(
+                            label: "First Name",
+                            controller: _firstNameController,
+                          ),
                         ),
                         Flexible(
-                          child: _textBox(label: "Last Name"),
+                          child: _textBox(
+                            label: "Last Name",
+                            controller: _lastNameController,
+                          ),
                         ),
                       ],
                     ),
-                    _textBox(label: "Email"),
-                    _textBox(label: "Password", obscureText: true),
-                    _textBox(label: "Confirm Password", obscureText: true),
-                    _textBox(label: "College"),
-                    _textBox(label: "Course"),
+                    _textBox(
+                      label: "Email",
+                      controller: _emailController,
+                    ),
+                    _textBox(
+                      label: "Password",
+                      obscureText: true,
+                      controller: _passwordController,
+                    ),
+                    _textBox(
+                      label: "Confirm Password",
+                      obscureText: true,
+                      controller: _confirmPasswordController,
+                    ),
+                    _textBox(
+                      label: "College",
+                      controller: _collegeController,
+                    ),
+                    _textBox(
+                      label: "Course",
+                      controller: _courseController,
+                    ),
                     _textBox(
                       label: "Phone Number",
-                      controller: _phoneController,
+                      controller: _phoneNumberController,
                     ),
                   ],
                 ),
@@ -145,7 +191,28 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                     height: height * 0.03,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final user = User(
+                        admin: false,
+                        collegeName: _collegeController.text,
+                        diamonds: 0,
+                        emailID: _emailController.text,
+                        eventList: ['event1'],
+                        firstName: _firstNameController.text,
+                        friendsList: ['friend1'],
+                        head: false,
+                        id: '',
+                        lastName: _lastNameController.text,
+                        password: _passwordController.text.toString(),
+                        phoneNumber: _phoneNumberController.text,
+                        registeredEvents: ['eventregister1'],
+                        userName:
+                            '${_firstNameController.text}${_lastNameController.text}',
+                        volunteer: false,
+                      );
+
+                      await _usersInstance.createNewUser(user: user);
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       width: width * 0.3,
@@ -176,7 +243,7 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
 }
 
 Widget _textBox({
-  TextEditingController? controller,
+  required TextEditingController controller,
   obscureText = false,
   required String label,
 }) {
@@ -198,7 +265,6 @@ Widget _textBox({
               ? TextInputType.emailAddress
               : TextInputType.text,
       decoration: InputDecoration(
-        // prefixText: (label == "Phone Number") ? "+91" : null,
         alignLabelWithHint: true,
         isDense: true,
         contentPadding: EdgeInsets.only(
@@ -217,3 +283,28 @@ Widget _textBox({
     ),
   );
 }
+
+bool? _passwordValidation({
+  required String pass1,
+  String? pass2,
+}) {
+  final RegExp regex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})[a-zA-Z0-9!@#\$%\^&\*]+$');
+  if (regex.hasMatch(pass1)) {
+    if (pass2 != null) {
+      if (pass1 == pass2) {
+        return true;
+      } else {
+        throw PasswordsDoNotMatchException();
+      }
+    } else {
+      return true;
+    }
+  } else {
+    throw PasswordDoesNotSatisfyRequirementsException();
+  }
+}
+
+class PasswordDoesNotSatisfyRequirementsException implements Exception {}
+
+class PasswordsDoNotMatchException implements Exception {}

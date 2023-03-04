@@ -1,23 +1,15 @@
-import 'package:techgen/models/events.dart';
 import 'package:techgen/models/user.dart';
 
 class Team {
-  final List<User> teamMembers;
-  final User teamHead;
   final String teamName;
+  final User teamHead;
   final String teamDescription;
+  final List<User> teamMembers;
 
   Team({
-    required this.teamMembers,
-    required this.teamHead,
     required this.teamName,
+    required this.teamHead,
     required this.teamDescription,
+    required this.teamMembers,
   });
-
-  void registerEvent({
-    required Event event,
-    required Team team,
-  }) {
-    // Register event and add on firebase
-  }
 }
