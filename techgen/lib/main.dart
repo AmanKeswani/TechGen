@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:techgen/constants/routes.dart';
-import 'package:techgen/screens/Auth/LoginPage.dart';
-import 'package:techgen/screens/Auth/RegisterPage.dart';
 import 'package:techgen/screens/SplashScreen.dart';
+import 'package:techgen/screens/auth/LoginPage.dart';
+import 'package:techgen/screens/auth/RegisterPageDetails.dart';
 import 'package:techgen/screens/user/HomePage.dart';
 import 'package:techgen/screens/user/UpcomingEventsNav.dart';
 
@@ -15,7 +15,7 @@ void main() => runApp(
         routes: {
           HomePageRoute: (context) => const HomePage(),
           LoginPageRoute: (context) => const LoginPage(),
-          RegisterPageRoute: (context) => const RegisterPage(),
+          RegisterPageRoute: (context) => const RegisterPageDetails(),
         },
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),

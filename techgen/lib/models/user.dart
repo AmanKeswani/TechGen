@@ -2,7 +2,7 @@ import 'package:techgen/models/events.dart';
 import 'package:techgen/models/teams.dart';
 
 class User {
-  final String uid;
+  final int id;
   final String firstName;
   final String lastName;
   final int phoneNumber;
@@ -15,9 +15,11 @@ class User {
   final List<Event> eventList;
   final List<Event> registeredEvents;
   final int diamonds;
+  final String password;
+  String username;
 
   User({
-    required this.uid,
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.phoneNumber,
@@ -30,6 +32,8 @@ class User {
     required this.eventList,
     required this.registeredEvents,
     required this.diamonds,
+    required this.password,
+    required this.username,
   });
 
   void addFriend({

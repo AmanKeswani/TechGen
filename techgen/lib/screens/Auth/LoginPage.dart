@@ -139,8 +139,14 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       TextButton(
+                        style: TextButton.styleFrom(
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
                         onPressed: () {
-                          Navigator.pushNamed(context, RegisterPageRoute);
+                          Navigator.pushNamed(
+                            context,
+                            RegisterPageRoute,
+                          );
                         },
                         child: const Text(
                           "Register Here",
@@ -174,9 +180,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text(
                   "Login",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             )

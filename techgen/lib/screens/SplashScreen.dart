@@ -65,9 +65,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 5),
       () {
-        Navigator.pushNamed(
+        Navigator.pushNamedAndRemoveUntil(
           context,
-          RegisterPageRoute,
+          LoginPageRoute,
+          (_) => false,
         );
       },
     );
