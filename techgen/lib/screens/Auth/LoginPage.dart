@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:techgen/constants/colors.dart';
 import 'package:techgen/constants/routes.dart';
+import 'package:techgen/database/CloudUsers.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,7 +11,26 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+CloudUsers _cloudUsers = CloudUsers();
+
+late final TextEditingController _usernameController;
+late final TextEditingController _passwordController;
+
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -60,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.symmetric(
                         horizontal: width * 0.01, vertical: height * 0.006),
                     child: TextField(
+                      controller: _usernameController,
                       decoration: InputDecoration(
                         prefixIconConstraints: const BoxConstraints(
                           minWidth: 60,
@@ -92,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.symmetric(
                         horizontal: width * 0.01, vertical: height * 0.006),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         prefixIconConstraints: const BoxConstraints(
@@ -167,7 +189,13 @@ class _LoginPageState extends State<LoginPage> {
                 height: height * 0.03,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await _cloudUsers.loginUser(
+                    username: _usernameController.text,
+                    password: _passwordController.text,
+                    context: context,
+                  );
+                },
                 child: Container(
                   alignment: Alignment.center,
                   width: width * 0.3,

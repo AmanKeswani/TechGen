@@ -6,6 +6,8 @@ import 'package:techgen/constants/routes.dart';
 import 'package:techgen/database/CloudUsers.dart';
 import 'package:techgen/models/user.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 class RegisterPageDetails extends StatefulWidget {
   const RegisterPageDetails({super.key});
 
@@ -47,12 +49,27 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
   }
 
   @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _collegeController.dispose();
+    _courseController.dispose();
+    _phoneNumberController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     _height = height;
     _width = width;
 
+    var nav = Navigator.of(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -210,19 +227,26 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                             '${_firstNameController.text}${_lastNameController.text}',
                         volunteer: false,
                       );
-                      final decision = _registrationValidation(
-                        college: _collegeController.text,
-                        confirmPassword: _confirmPasswordController.text,
-                        course: _courseController.text,
-                        emailID: _emailController.text,
-                        firstName: _firstNameController.text,
-                        lastName: _lastNameController.text,
-                        password: _passwordController.text,
-                        phoneNumber: _phoneNumberController.text,
-                      );
-                      if (decision) {
+                      try {
+                        _registrationValidation(
+                          college: _collegeController.text,
+                          confirmPassword: _confirmPasswordController.text,
+                          course: _courseController.text,
+                          emailID: _emailController.text,
+                          firstName: _firstNameController.text,
+                          lastName: _lastNameController.text,
+                          password: _passwordController.text,
+                          phoneNumber: _phoneNumberController.text,
+                        );
                         await _usersInstance.createNewUser(user: user);
-                      }
+                        nav.pushNamedAndRemoveUntil(
+                            LoginPageRoute, (_) => false);
+                      } on EmptyRegistrationFieldException catch (_) {
+                        Fluttertoast.showToast(
+                          msg: 'One or more of the fields are empty.',
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      } on EmailErrorException catch (_) {}
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -326,7 +350,7 @@ bool _phoneValidation() {
   return true;
 }
 
-class EmailErrorException {}
+class EmailErrorException implements Exception {}
 
 class EmptyRegistrationFieldException implements Exception {}
 

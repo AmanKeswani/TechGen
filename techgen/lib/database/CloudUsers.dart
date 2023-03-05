@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:techgen/constants/dbConstants.dart';
+import 'package:techgen/constants/routes.dart';
 import 'package:techgen/models/user.dart';
 
 class CloudUsers {
@@ -99,4 +101,15 @@ class CloudUsers {
   static final CloudUsers _shared = CloudUsers._sharedInstance();
   CloudUsers._sharedInstance();
   factory CloudUsers() => _shared;
+
+  Future<void> loginUser({
+    required String username,
+    required String password,
+    required BuildContext context,
+  }) async {
+    // var user = await users.where(userNameUser, isEqualTo: username).get();
+    // var userDocumentSnapshot = user.docs.first;
+    // var currentUser = User.fromSnapshot(userDocumentSnapshot);
+    Navigator.of(context).pushNamedAndRemoveUntil(HomePageRoute, (_) => false);
+  }
 }

@@ -14,9 +14,9 @@ class User {
   final bool head;
   final bool volunteer;
   final int diamonds;
-  final List<String> friendsList;
-  final List<String> eventList;
-  final List<String> registeredEvents;
+  final List<dynamic> friendsList;
+  final List<dynamic> eventList;
+  final List<dynamic> registeredEvents;
 
   User({
     required this.id,
@@ -40,16 +40,16 @@ class User {
       : id = snapshot.id,
         firstName = snapshot.data()[firstNameUser],
         lastName = snapshot.data()[lastNameUser],
-        userName = snapshot.data()[lastNameUser],
-        phoneNumber = snapshot.data()[lastNameUser],
-        emailID = snapshot.data()[lastNameUser],
-        password = snapshot.data()[lastNameUser],
-        collegeName = snapshot.data()[lastNameUser],
-        admin = snapshot.data()[lastNameUser],
-        head = snapshot.data()[lastNameUser],
-        volunteer = snapshot.data()[lastNameUser],
-        diamonds = snapshot.data()[lastNameUser],
-        friendsList = snapshot.data()[lastNameUser],
-        eventList = snapshot.data()[lastNameUser],
-        registeredEvents = snapshot.data()[lastNameUser];
+        userName = snapshot.data()[userNameUser],
+        phoneNumber = snapshot.data()[phoneNumberUser],
+        emailID = snapshot.data()[emailIdUser],
+        password = snapshot.data()[passwordUser],
+        collegeName = snapshot.data()[collegeNameUser],
+        admin = snapshot.data()[adminUser],
+        head = snapshot.data()[headUser],
+        volunteer = snapshot.data()[volunteerUser],
+        diamonds = snapshot.data()[diamondsUser],
+        friendsList = snapshot.data()[friendsListUser],
+        eventList = snapshot.data()[eventsListUser],
+        registeredEvents = snapshot.data()[registeredEventsUser];
 }
