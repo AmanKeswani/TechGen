@@ -166,9 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
                               RegisterPageRoute,
+                              (_) => false,
                             );
                           },
                           child: const Text(

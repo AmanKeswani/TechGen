@@ -340,24 +340,32 @@ bool _registrationValidation({
       phoneNumber.isEmpty) {
     throw EmptyRegistrationFieldException();
   }
-  if (_emailValidation() == false) throw EmailErrorException();
-  if (_passwordValidation() == true) {}
-  if (_phoneValidation()) {}
+  if (_emailValidation(emailID) == false) throw EmailErrorException();
+  if (_passwordValidation(password) == false) throw PasswordErrorException();
+  if (_phoneValidation(phoneNumber) == false) throw PhoneNumberErrorException();
   return true;
 }
 
-bool _phoneValidation() {
-  return true;
+bool _phoneValidation(phoneNumber) {
+  final phoneNumberRegExp = RegExp(r'^\+[1-9]\d{1,2}[ ]?\d{9}$');
+  return phoneNumberRegExp.hasMatch(phoneNumber);
 }
 
 class EmailErrorException implements Exception {}
 
+class PasswordErrorException implements Exception {}
+
+class PhoneNumberErrorException implements Exception {}
+
 class EmptyRegistrationFieldException implements Exception {}
 
-bool _passwordValidation() {
-  return true;
+bool _passwordValidation(password) {
+  final passwordRegExp =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  return passwordRegExp.hasMatch(password);
 }
 
-bool _emailValidation() {
-  return true;
+bool _emailValidation(emailID) {
+  final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  return emailRegExp.hasMatch(emailID);
 }
