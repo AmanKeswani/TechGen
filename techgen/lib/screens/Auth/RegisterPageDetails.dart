@@ -7,6 +7,8 @@ import 'package:techgen/database/CloudUsers.dart';
 import 'package:techgen/models/user.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:techgen/screens/auth/auth_exceptions.dart';
+import 'package:techgen/utils/auth_validations.dart';
 
 class RegisterPageDetails extends StatefulWidget {
   const RegisterPageDetails({super.key});
@@ -228,7 +230,7 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                         volunteer: false,
                       );
                       try {
-                        _registrationValidation(
+                        registrationValidation(
                           college: _collegeController.text,
                           confirmPassword: _confirmPasswordController.text,
                           course: _courseController.text,
@@ -240,7 +242,9 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                         );
                         await _usersInstance.createNewUser(user: user);
                         nav.pushNamedAndRemoveUntil(
-                            LoginPageRoute, (_) => false);
+                          LoginPageRoute,
+                          (_) => false,
+                        );
                       } on EmptyRegistrationFieldException catch (_) {
                         Fluttertoast.showToast(
                           msg: 'One or more of the fields are empty.',
@@ -317,55 +321,4 @@ Widget _textBox({
       ),
     ),
   );
-}
-
-bool _registrationValidation({
-  required String firstName,
-  required String lastName,
-  required String emailID,
-  required String password,
-  required String confirmPassword,
-  required String college,
-  required String course,
-  required String phoneNumber,
-}) {
-  if (firstName.isEmpty ||
-      lastName.isEmpty ||
-      emailID.isEmpty ||
-      password.isEmpty ||
-      confirmPassword.isEmpty ||
-      college.isEmpty ||
-      course.isEmpty ||
-      phoneNumber == '+91' ||
-      phoneNumber.isEmpty) {
-    throw EmptyRegistrationFieldException();
-  }
-  if (_emailValidation(emailID) == false) throw EmailErrorException();
-  if (_passwordValidation(password) == false) throw PasswordErrorException();
-  if (_phoneValidation(phoneNumber) == false) throw PhoneNumberErrorException();
-  return true;
-}
-
-bool _phoneValidation(phoneNumber) {
-  final phoneNumberRegExp = RegExp(r'^\+[1-9]\d{1,2}[ ]?\d{9}$');
-  return phoneNumberRegExp.hasMatch(phoneNumber);
-}
-
-class EmailErrorException implements Exception {}
-
-class PasswordErrorException implements Exception {}
-
-class PhoneNumberErrorException implements Exception {}
-
-class EmptyRegistrationFieldException implements Exception {}
-
-bool _passwordValidation(password) {
-  final passwordRegExp =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-  return passwordRegExp.hasMatch(password);
-}
-
-bool _emailValidation(emailID) {
-  final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  return emailRegExp.hasMatch(emailID);
 }

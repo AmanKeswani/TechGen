@@ -2,6 +2,7 @@
 
 // User
 const String usersCollection = 'User';
+const String idUser = 'Id';
 const String firstNameUser = 'firstName';
 const String lastNameUser = 'lastName';
 const String userNameUser = 'username';
