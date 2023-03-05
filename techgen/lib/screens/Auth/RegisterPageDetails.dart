@@ -211,20 +211,20 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                     onPressed: () async {
                       final user = User(
                         admin: false,
-                        collegeName: _collegeController.text,
+                        collegeName: _collegeController.text.trim(),
                         diamonds: 0,
-                        emailID: _emailController.text,
+                        emailID: _emailController.text.trim(),
                         eventList: ['event1'],
-                        firstName: _firstNameController.text,
+                        firstName: _firstNameController.text.trim(),
                         friendsList: ['friend1'],
                         head: false,
                         id: '',
-                        lastName: _lastNameController.text,
-                        password: _passwordController.text.toString(),
-                        phoneNumber: _phoneNumberController.text,
+                        lastName: _lastNameController.text.trim(),
+                        password: _passwordController.text..trim(),
+                        phoneNumber: _phoneNumberController.text.trim(),
                         registeredEvents: ['eventregister1'],
                         userName:
-                            '${_firstNameController.text}${_lastNameController.text}',
+                            '${_firstNameController.text.trim()}${_lastNameController.text.trim()}',
                         volunteer: false,
                       );
                       try {

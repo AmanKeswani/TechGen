@@ -44,9 +44,9 @@ class _HomePageState extends State<HomePage> {
             _index = index;
           });
         },
-        gap: 7,
+        gap: 5,
         backgroundColor: Colors.white,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(7),
         tabMargin: const EdgeInsets.symmetric(
           vertical: 10,
         ),

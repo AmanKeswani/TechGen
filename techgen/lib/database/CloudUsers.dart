@@ -1,7 +1,8 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:techgen/constants/dbConstants.dart';
 import 'package:techgen/constants/routes.dart';
 import 'package:techgen/models/user.dart';
@@ -107,9 +108,16 @@ class CloudUsers {
     required String password,
     required BuildContext context,
   }) async {
-    // var user = await users.where(userNameUser, isEqualTo: username).get();
-    // var userDocumentSnapshot = user.docs.first;
-    // var currentUser = User.fromSnapshot(userDocumentSnapshot);
-    Navigator.of(context).pushNamedAndRemoveUntil(HomePageRoute, (_) => false);
+    var user = await users.where(userNameUser, isEqualTo: username).get();
+    var userDocumentSnapshot = user.docs;
+    print(userDocumentSnapshot.length);
+    if (userDocumentSnapshot.isNotEmpty) {
+      var currentUser = User.fromSnapshot(userDocumentSnapshot.first);
+      print(currentUser.toString());
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(HomePageRoute, (_) => false);
+    } else {
+      Fluttertoast.showToast(msg: "No user with the given username exists");
+    }
   }
 }
