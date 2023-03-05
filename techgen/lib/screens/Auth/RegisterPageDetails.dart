@@ -210,8 +210,19 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                             '${_firstNameController.text}${_lastNameController.text}',
                         volunteer: false,
                       );
-
-                      await _usersInstance.createNewUser(user: user);
+                      final decision = _registrationValidation(
+                        college: _collegeController.text,
+                        confirmPassword: _confirmPasswordController.text,
+                        course: _courseController.text,
+                        emailID: _emailController.text,
+                        firstName: _firstNameController.text,
+                        lastName: _lastNameController.text,
+                        password: _passwordController.text,
+                        phoneNumber: _phoneNumberController.text,
+                      );
+                      if (decision) {
+                        await _usersInstance.createNewUser(user: user);
+                      }
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -284,27 +295,45 @@ Widget _textBox({
   );
 }
 
-bool? _passwordValidation({
-  required String pass1,
-  String? pass2,
+bool _registrationValidation({
+  required String firstName,
+  required String lastName,
+  required String emailID,
+  required String password,
+  required String confirmPassword,
+  required String college,
+  required String course,
+  required String phoneNumber,
 }) {
-  final RegExp regex = RegExp(
-      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})[a-zA-Z0-9!@#\$%\^&\*]+$');
-  if (regex.hasMatch(pass1)) {
-    if (pass2 != null) {
-      if (pass1 == pass2) {
-        return true;
-      } else {
-        throw PasswordsDoNotMatchException();
-      }
-    } else {
-      return true;
-    }
-  } else {
-    throw PasswordDoesNotSatisfyRequirementsException();
+  if (firstName.isEmpty ||
+      lastName.isEmpty ||
+      emailID.isEmpty ||
+      password.isEmpty ||
+      confirmPassword.isEmpty ||
+      college.isEmpty ||
+      course.isEmpty ||
+      phoneNumber == '+91' ||
+      phoneNumber.isEmpty) {
+    throw EmptyRegistrationFieldException();
   }
+  if (_emailValidation() == false) throw EmailErrorException();
+  if (_passwordValidation() == true) {}
+  if (_phoneValidation()) {}
+  return true;
 }
 
-class PasswordDoesNotSatisfyRequirementsException implements Exception {}
+bool _phoneValidation() {
+  return true;
+}
 
-class PasswordsDoNotMatchException implements Exception {}
+class EmailErrorException {}
+
+class EmptyRegistrationFieldException implements Exception {}
+
+bool _passwordValidation() {
+  return true;
+}
+
+bool _emailValidation() {
+  return true;
+}

@@ -17,177 +17,179 @@ class _LoginPageState extends State<LoginPage> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: height * 0.05,
-            ),
-            Text(
-              "Welcome to TechGen",
-              style: TextStyle(
-                color: const Color(0xFF54A48B),
-                fontSize: width * 0.055,
-                fontWeight: FontWeight.w300,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: height * 0.05,
               ),
-            ),
-            SizedBox(
-              height: height * 0.025,
-            ),
-            Text(
-              "Login to your account",
-              style: TextStyle(
-                color: titleColor,
-                fontSize: width * 0.08,
-                fontWeight: FontWeight.w500,
+              Text(
+                "Welcome to TechGen",
+                style: TextStyle(
+                  color: const Color(0xFF54A48B),
+                  fontSize: width * 0.055,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
-            ),
-            SizedBox(
-              height: height * 0.1,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * 0.08,
+              SizedBox(
+                height: height * 0.025,
               ),
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: textBoxColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    )),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.01, vertical: height * 0.006),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIconConstraints: const BoxConstraints(
-                        minWidth: 60,
+              Text(
+                "Login to your account",
+                style: TextStyle(
+                  color: titleColor,
+                  fontSize: width * 0.08,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(
+                height: height * 0.1,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.08,
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: textBoxColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      )),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.01, vertical: height * 0.006),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIconConstraints: const BoxConstraints(
+                          minWidth: 60,
+                        ),
+                        hintText: "Username",
+                        prefixIcon: Icon(
+                          Icons.person_2_rounded,
+                          size: width * 0.08,
+                        ),
+                        border: InputBorder.none,
                       ),
-                      hintText: "Username",
-                      prefixIcon: Icon(
-                        Icons.person_2_rounded,
-                        size: width * 0.08,
-                      ),
-                      border: InputBorder.none,
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: height * 0.015,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * 0.08,
+              SizedBox(
+                height: height * 0.015,
               ),
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: textBoxColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    )),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.01, vertical: height * 0.006),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIconConstraints: const BoxConstraints(
-                        minWidth: 60,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.08,
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: textBoxColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      )),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.01, vertical: height * 0.006),
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        prefixIconConstraints: const BoxConstraints(
+                          minWidth: 60,
+                        ),
+                        hintText: "Password",
+                        prefixIcon: Icon(
+                          Icons.key,
+                          size: width * 0.08,
+                        ),
+                        border: InputBorder.none,
                       ),
-                      hintText: "Password",
-                      prefixIcon: Icon(
-                        Icons.key,
-                        size: width * 0.08,
-                      ),
-                      border: InputBorder.none,
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: height * 0.015,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.08),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              SizedBox(
+                height: height * 0.015,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.08),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            RegisterPageRoute,
-                          );
-                        },
-                        child: const Text(
-                          "Register Here",
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: const [
+                        Text(
+                          "Don't have an account?",
                           style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17,
-                            color: titleColor,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: height * 0.03,
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Container(
-                alignment: Alignment.center,
-                width: width * 0.3,
-                height: height * 0.05,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  color: titleColor,
-                ),
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              RegisterPageRoute,
+                            );
+                          },
+                          child: const Text(
+                            "Register Here",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                              color: titleColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: height * 0.03,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Container(
+                  alignment: Alignment.center,
+                  width: width * 0.3,
+                  height: height * 0.05,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    color: titleColor,
+                  ),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
