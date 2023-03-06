@@ -1,12 +1,8 @@
 // ignore_for_file: file_names, use_build_context_synchronously, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:techgen/constants/images.dart';
-import 'package:techgen/constants/routes.dart';
-import 'package:techgen/constants/sharedPreferences.dart';
+import 'package:techgen/database/CloudUsers.dart';
 
 class HomePageNav extends StatefulWidget {
   const HomePageNav({super.key});
@@ -15,16 +11,15 @@ class HomePageNav extends StatefulWidget {
   State<HomePageNav> createState() => _HomePageNavState();
 }
 
-late final SharedPreferences _sharedPreferences;
-var _context;
+late CloudUsers _usersInstance;
 
 class _HomePageNavState extends State<HomePageNav> {
   @override
-  @override
   Widget build(BuildContext context) {
-    _context = context;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    _usersInstance = CloudUsers();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -71,7 +66,9 @@ class _HomePageNavState extends State<HomePageNav> {
             child: Padding(
               padding: const EdgeInsets.all(50.0),
               child: IconButton(
-                onPressed: _logOut,
+                onPressed: () {
+                  _usersInstance.logOut(context: context);
+                },
                 icon: Icon(Icons.logout),
               ),
             ),
@@ -79,21 +76,6 @@ class _HomePageNavState extends State<HomePageNav> {
         )),
       ],
     );
-  }
-
-  void _logOut() {
-    var logger = Logger();
-    setState(() async {
-      _sharedPreferences = await SharedPreferences.getInstance();
-      logger.d(
-        _sharedPreferences.setString(userSharedPreferenceString, 'null'),
-      );
-      Navigator.of(_context).pushNamedAndRemoveUntil(
-        LoginPageRoute,
-        (route) => false,
-      );
-      Fluttertoast.showToast(msg: 'You have been logged out');
-    });
   }
 }
 

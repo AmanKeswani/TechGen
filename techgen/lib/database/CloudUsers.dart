@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:techgen/constants/dbConstants.dart';
 import 'package:techgen/constants/routes.dart';
@@ -130,5 +131,20 @@ class CloudUsers {
     } else {
       Fluttertoast.showToast(msg: "No user with the given username exists");
     }
+  }
+
+  void logOut({required BuildContext context}) async {
+    var logger = Logger();
+    late final SharedPreferences _sharedPreferences;
+
+    _sharedPreferences = await SharedPreferences.getInstance();
+    logger.d(
+      _sharedPreferences.setString(userSharedPreferenceString, 'null'),
+    );
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      LoginPageRoute,
+      (route) => false,
+    );
+    Fluttertoast.showToast(msg: 'You have been logged out');
   }
 }
