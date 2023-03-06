@@ -36,28 +36,6 @@ class User {
     required this.registeredEvents,
   });
 
-  Map<String, Object> toJSON({
-    required User user,
-  }) {
-    return {
-      idUser: user.id,
-      firstNameUser: user.firstName,
-      lastNameUser: user.lastName,
-      userNameUser: user.userName,
-      phoneNumberUser: user.phoneNumber,
-      emailIdUser: user.emailID,
-      passwordUser: user.password,
-      collegeNameUser: user.collegeName,
-      adminUser: user.admin,
-      headUser: user.head,
-      volunteerUser: user.volunteer,
-      diamondsUser: user.diamonds,
-      friendsListUser: user.friendsList,
-      eventsListUser: user.eventList,
-      registeredEventsUser: user.registeredEvents,
-    };
-  }
-
   User.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
         firstName = snapshot.data()[firstNameUser],
@@ -70,8 +48,8 @@ class User {
         admin = snapshot.data()[adminUser],
         head = snapshot.data()[headUser],
         volunteer = snapshot.data()[volunteerUser],
-        diamonds = snapshot.data()[diamondsUser],
-        friendsList = snapshot.data()[friendsListUser],
-        eventList = snapshot.data()[eventsListUser],
+        diamonds = snapshot.data()[diamondUser],
+        friendsList = snapshot.data()[friendListUser],
+        eventList = snapshot.data()[eventListUser],
         registeredEvents = snapshot.data()[registeredEventsUser];
 }

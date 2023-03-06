@@ -13,8 +13,8 @@ class LoginPage extends StatefulWidget {
 
 CloudUsers _cloudUsers = CloudUsers();
 
-late final TextEditingController _usernameController;
-late final TextEditingController _passwordController;
+late TextEditingController _usernameController;
+late TextEditingController _passwordController;
 
 class _LoginPageState extends State<LoginPage> {
   @override
@@ -166,10 +166,9 @@ class _LoginPageState extends State<LoginPage> {
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                           onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(
+                            Navigator.pushNamed(
                               context,
                               RegisterPageRoute,
-                              (_) => false,
                             );
                           },
                           child: const Text(

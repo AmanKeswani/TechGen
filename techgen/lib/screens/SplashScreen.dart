@@ -1,7 +1,12 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously, unused_local_variable
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:techgen/constants/routes.dart';
 import 'package:techgen/constants/images.dart';
+import 'package:techgen/constants/sharedPreferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,6 +14,8 @@ class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
+
+late final SharedPreferences _sharedPreferences;
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
@@ -64,12 +71,29 @@ class _SplashScreenState extends State<SplashScreen> {
   void _navigateLoginScreen() {
     Future.delayed(
       const Duration(seconds: 5),
-      () {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          LoginPageRoute,
-          (_) => false,
-        );
+      () async {
+        _sharedPreferences = await SharedPreferences.getInstance();
+        final userJSON =
+            _sharedPreferences.getString(userSharedPreferenceString) ?? 'null';
+        if (userJSON == 'null') {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPageRoute,
+            (_) => false,
+          );
+        } else {
+          var logger = Logger();
+          try {
+            final variable = jsonDecode(userJSON);
+          } on Exception catch (e) {
+            logger.e(e);
+          }
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            HomePageRoute,
+            (_) => false,
+          );
+        }
       },
     );
   }

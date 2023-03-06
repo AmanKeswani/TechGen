@@ -13,9 +13,9 @@ const String collegeNameUser = 'collegeName';
 const String adminUser = 'admin';
 const String headUser = 'head';
 const String volunteerUser = 'volunteer';
-const String diamondsUser = 'diamonds';
-const String friendsListUser = 'friendsList';
-const String eventsListUser = 'eventsList';
+const String diamondUser = 'diamonds';
+const String friendListUser = 'friendsList';
+const String eventListUser = 'eventsList';
 const String registeredEventsUser = 'registeredEvents';
 
 

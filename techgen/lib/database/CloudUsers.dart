@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,6 +10,7 @@ import 'package:techgen/constants/dbConstants.dart';
 import 'package:techgen/constants/routes.dart';
 import 'package:techgen/constants/sharedPreferences.dart';
 import 'package:techgen/models/user.dart';
+import 'package:techgen/utils/converters.dart';
 
 class CloudUsers {
   final users = FirebaseFirestore.instance.collection(usersCollection);
@@ -37,9 +40,9 @@ class CloudUsers {
         adminUser: user.admin,
         headUser: user.head,
         volunteerUser: user.volunteer,
-        diamondsUser: user.diamonds,
-        friendsListUser: user.friendsList,
-        eventsListUser: user.eventList,
+        diamondUser: user.diamonds,
+        friendListUser: user.friendsList,
+        eventListUser: user.eventList,
         registeredEventsUser: user.registeredEvents,
       });
     } catch (_) {
@@ -75,9 +78,9 @@ class CloudUsers {
       adminUser: user.admin,
       headUser: user.head,
       volunteerUser: user.volunteer,
-      diamondsUser: user.diamonds,
-      friendsListUser: user.friendsList,
-      eventsListUser: user.eventList,
+      diamondUser: user.diamonds,
+      friendListUser: user.friendsList,
+      eventListUser: user.eventList,
       registeredEventsUser: user.registeredEvents,
     });
 
@@ -85,11 +88,11 @@ class CloudUsers {
     return User(
       admin: fetchedUser[adminUser],
       collegeName: fetchedUser[collegeNameUser],
-      diamonds: fetchedUser[diamondsUser],
+      diamonds: fetchedUser[diamondUser],
       emailID: fetchedUser[emailIdUser],
-      eventList: fetchedUser[eventsListUser],
+      eventList: fetchedUser[eventListUser],
       firstName: fetchedUser[firstNameUser],
-      friendsList: fetchedUser[friendsListUser],
+      friendsList: fetchedUser[friendListUser],
       head: fetchedUser[headUser],
       id: fetchedUser.id.toString(),
       lastName: fetchedUser[lastNameUser],
@@ -116,10 +119,14 @@ class CloudUsers {
       var currentUser = User.fromSnapshot(userDocumentSnapshot.first);
       final SharedPreferences _sharedPreference =
           await SharedPreferences.getInstance();
-      final map = currentUser.toJSON(user: currentUser);
-      _sharedPreference.setString(userSharedPreferenceString, map.toString());
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomePageRoute, (_) => false);
+      // final map = toJSON(user: currentUser);
+      final map = jsonEncode(toJSON(user: currentUser));
+      await _sharedPreference.setString(
+          userSharedPreferenceString, map.toString());
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        HomePageRoute,
+        (_) => false,
+      );
     } else {
       Fluttertoast.showToast(msg: "No user with the given username exists");
     }

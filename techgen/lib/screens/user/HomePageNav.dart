@@ -1,9 +1,12 @@
-// ignore_for_file: file_names
-
-// import 'dart:ui';
+// ignore_for_file: file_names, use_build_context_synchronously, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:techgen/constants/images.dart';
+import 'package:techgen/constants/routes.dart';
+import 'package:techgen/constants/sharedPreferences.dart';
 
 class HomePageNav extends StatefulWidget {
   const HomePageNav({super.key});
@@ -12,11 +15,17 @@ class HomePageNav extends StatefulWidget {
   State<HomePageNav> createState() => _HomePageNavState();
 }
 
+late final SharedPreferences _sharedPreferences;
+var _context;
+
 class _HomePageNavState extends State<HomePageNav> {
   @override
+  @override
   Widget build(BuildContext context) {
+    _context = context;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -59,348 +68,34 @@ class _HomePageNavState extends State<HomePageNav> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: ListWheelScrollView(
-              overAndUnderCenterOpacity: 0.7,
-              physics: const FixedExtentScrollPhysics(),
-              diameterRatio: 6,
-              squeeze: 1.5,
-              itemExtent: 200,
-              children: [
-                Material(
-                  // elevation: 10,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                      color: Colors.amber,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Event Name:",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Event Description",
-                                  style: TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.calendar_today_rounded),
-                              iconSize: 35,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  // elevation: 10,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                      color: Colors.amber,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Event Name:",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Event Description",
-                                  style: TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.calendar_today_rounded),
-                              iconSize: 35,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                      color: Colors.amber,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Event Name:",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Event Description",
-                                  style: TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.calendar_today_rounded),
-                              iconSize: 35,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: IconButton(
+                onPressed: _logOut,
+                icon: Icon(Icons.logout),
+              ),
             ),
           ),
         )),
       ],
     );
   }
+
+  void _logOut() {
+    var logger = Logger();
+    setState(() async {
+      _sharedPreferences = await SharedPreferences.getInstance();
+      logger.d(
+        _sharedPreferences.setString(userSharedPreferenceString, 'null'),
+      );
+      Navigator.of(_context).pushNamedAndRemoveUntil(
+        LoginPageRoute,
+        (route) => false,
+      );
+      Fluttertoast.showToast(msg: 'You have been logged out');
+    });
+  }
 }
-
-// import 'package:linked_scroll_controller/linked_scroll_controller.dart';
-
-// class SecondPage extends StatefulWidget {
-//   const SecondPage({super.key});
-
-//   @override
-//   State<SecondPage> createState() => _SecondPageState();
-// }
-
-// class _SecondPageState extends State<SecondPage> {
-//   final double _lowerListItemHeight = 100;
-//   final double _upperListItemHeight = 140;
-
-//   late LinkedScrollControllerGroup _controllers;
-//   late ScrollController lowerListController;
-//   late ScrollController upperListController;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controllers = LinkedScrollControllerGroup();
-//     lowerListController = _controllers.addAndGet();
-//     upperListController = _controllers.addAndGet();
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-
-//   Widget _buildLowerList() {
-//     return ListView(
-//       controller: lowerListController,
-//       children: List.generate(
-//         20,
-//         (index) => Padding(
-//           padding: const EdgeInsets.symmetric(
-//             vertical: 20.0,
-//             horizontal: 45,
-//           ),
-//           child: _lowerListItem(
-//             index,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-
-//   Widget _buildUpperList() {
-//     return ListView(
-//       controller: upperListController,
-//       children: List.generate(
-//         20,
-//         (index) => _upperListItem(index),
-//       ),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: Stack(
-//         children: [
-//           _buildLowerList(),
-//           Center(
-//             child: Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-//               child: Container(
-//                 height: _upperListItemHeight,
-//                 clipBehavior: Clip.antiAlias,
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(10),
-//                 ),
-//                 child: Stack(
-//                   fit: StackFit.loose,
-//                   children: [
-//                     Positioned(
-//                       top: -290,
-//                       left: 0,
-//                       child: SizedBox(
-//                         width: MediaQuery.of(context).size.width,
-//                         height: MediaQuery.of(context).size.height,
-//                         child: Center(
-//                           child: _buildUpperList(),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _lowerListItem(int index) {
-//     return Container(
-//       height: _lowerListItemHeight,
-//       decoration: BoxDecoration(
-//           color: Colors.greenAccent.withOpacity(0.3),
-//           borderRadius: BorderRadius.circular(10)),
-//       padding: const EdgeInsets.symmetric(
-//         vertical: 15,
-//         horizontal: 20,
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             "Event: ${index.toString()}",
-//           ),
-//           const SizedBox(
-//             height: 10,
-//           ),
-//           const Text("Event Description")
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _upperListItem(int index) {
-//     return Container(
-//       height: _upperListItemHeight,
-//       color: Colors.greenAccent,
-//       padding: const EdgeInsets.symmetric(
-//         vertical: 20,
-//         horizontal: 20,
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             "Event: ${index.toString()}",
-//             style: const TextStyle(
-//               fontSize: 18,
-//               fontWeight: FontWeight.w500,
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 10,
-//           ),
-//           const Text(
-//             "Event Description event description event description event description event description",
-//             style: TextStyle(
-//               fontSize: 16,
-//               fontWeight: FontWeight.w400,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({
-//     super.key,
-//     // required this.title,
-//   });
-
-//   // final String title;
-
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
 
 // class _MyHomePageState extends State<MyHomePage>
 //     with SingleTickerProviderStateMixin {

@@ -20,16 +20,16 @@ class RegisterPageDetails extends StatefulWidget {
 var _height;
 var _width;
 
-late final _firstNameController;
-late final _lastNameController;
-late final _emailController;
-late final _passwordController;
-late final _confirmPasswordController;
-late final _collegeController;
-late final _courseController;
-late final _phoneNumberController;
+late TextEditingController _firstNameController;
+late TextEditingController _lastNameController;
+late TextEditingController _emailController;
+late TextEditingController _passwordController;
+late TextEditingController _confirmPasswordController;
+late TextEditingController _collegeController;
+late TextEditingController _courseController;
+late TextEditingController _phoneNumberController;
 
-late final CloudUsers _usersInstance;
+late CloudUsers _usersInstance;
 
 class _RegisterPageDetailsState extends State<RegisterPageDetails> {
   @override
@@ -187,9 +187,10 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(
+                                Navigator.pushNamedAndRemoveUntil(
                                   context,
                                   LoginPageRoute,
+                                  (_) => false,
                                 );
                               },
                               child: const Text(
@@ -216,15 +217,15 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                         collegeName: _collegeController.text.trim(),
                         diamonds: 0,
                         emailID: _emailController.text.trim(),
-                        eventList: ['event1'],
+                        eventList: [],
                         firstName: _firstNameController.text.trim(),
-                        friendsList: ['friend1'],
+                        friendsList: [],
                         head: false,
                         id: '',
                         lastName: _lastNameController.text.trim(),
                         password: _passwordController.text..trim(),
                         phoneNumber: _phoneNumberController.text.trim(),
-                        registeredEvents: ['eventregister1'],
+                        registeredEvents: [],
                         userName:
                             '${_firstNameController.text.trim()}${_lastNameController.text.trim()}',
                         volunteer: false,
@@ -241,16 +242,25 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                           phoneNumber: _phoneNumberController.text,
                         );
                         await _usersInstance.createNewUser(user: user);
-                        nav.pushNamedAndRemoveUntil(
-                          LoginPageRoute,
-                          (_) => false,
-                        );
+                        nav.pop();
+                        Fluttertoast.showToast(
+                            msg: "User created. Username: ${user.userName}");
                       } on EmptyRegistrationFieldException catch (_) {
                         Fluttertoast.showToast(
                           msg: 'One or more of the fields are empty.',
                           toastLength: Toast.LENGTH_SHORT,
                         );
-                      } on EmailErrorException catch (_) {}
+                      } on EmailErrorException catch (_) {
+                        Fluttertoast.showToast(
+                          msg: 'Email',
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      } on PasswordErrorException catch (_) {
+                        Fluttertoast.showToast(
+                          msg: 'Password',
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      }
                     },
                     child: Container(
                       alignment: Alignment.center,
