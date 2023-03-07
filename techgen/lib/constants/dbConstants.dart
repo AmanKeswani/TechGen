@@ -18,11 +18,29 @@ const String friendListUser = 'friendsList';
 const String eventListUser = 'eventsList';
 const String registeredEventsUser = 'registeredEvents';
 
-
 // Events
 
-
-
-
+const String eventsCollection = 'Events';
+const String idEvent = 'Id';
+const String eventNameEvent = 'eventName';
+const String eventDescriptionEvent = 'eventDescription';
+const String startDateEvent = 'startDate';
+const String endDateEvent = 'endDate';
+const String eventBannerEvent = 'eventBanner';
+const String redirectLinkEvent = 'redirectLink';
+const String participantListEvent = 'participantsList';
+const String teamListEvent = 'teamsList';
+const String adminListEvent = 'adminList';
+const String headListEvent = 'headList';
+const String volunteerListEvent = 'volunteerList';
 
 // Teams
+
+const String teamsCollection = 'Teams';
+
+const String idTeam = 'Id';
+const String teamNameTeam = 'teamName';
+const String teamDescriptionTeam = 'teamDescription';
+const String teamHeadTeam = 'teamHead';
+const String teamMembersTeam = 'teamMembers';
+const String previousEventsTeam = 'previousEvents';

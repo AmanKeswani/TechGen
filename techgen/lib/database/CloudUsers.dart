@@ -15,7 +15,8 @@ import 'package:techgen/utils/converters.dart';
 
 class CloudUsers {
   final users = FirebaseFirestore.instance.collection(usersCollection);
-
+  var logger = Logger();
+  late final SharedPreferences _sharedPreferences;
   Future<void> deleteUser({
     required User user,
   }) async {
@@ -55,17 +56,33 @@ class CloudUsers {
       .snapshots()
       .map((event) => event.docs.map((doc) => User.fromSnapshot(doc)));
 
-  Future<Iterable<User>> getUsers() async {
+  Future<User?> getUserByIdorEmail({
+    String? id,
+    String? email,
+  }) async {
     try {
-      return await users.get().then((value) {
-        return value.docs.map((doc) => User.fromSnapshot(doc));
-      });
-    } catch (_) {
+      if (id != null) {
+        return await users
+            .where(idUser, isEqualTo: id)
+            .get()
+            .then((value) => User.fromSnapshot(value.docs.first));
+      } else {
+        return await users
+            .where(
+              emailIdUser,
+              isEqualTo: email,
+            )
+            .get()
+            .then((value) {
+          return User.fromSnapshot(value.docs.first);
+        });
+      }
+    } catch (e) {
       rethrow;
     }
   }
 
-  Future<User?> createNewUser({
+  Future<User> createNewUser({
     required User user,
   }) async {
     final newUser = await users.add({
@@ -86,23 +103,7 @@ class CloudUsers {
     });
 
     final fetchedUser = await newUser.get();
-    return User(
-      admin: fetchedUser[adminUser],
-      collegeName: fetchedUser[collegeNameUser],
-      diamonds: fetchedUser[diamondUser],
-      emailID: fetchedUser[emailIdUser],
-      eventList: fetchedUser[eventListUser],
-      firstName: fetchedUser[firstNameUser],
-      friendsList: fetchedUser[friendListUser],
-      head: fetchedUser[headUser],
-      id: fetchedUser.id.toString(),
-      lastName: fetchedUser[lastNameUser],
-      password: fetchedUser[passwordUser],
-      phoneNumber: fetchedUser[phoneNumberUser],
-      registeredEvents: fetchedUser[registeredEventsUser],
-      userName: fetchedUser[userNameUser],
-      volunteer: fetchedUser[volunteerUser],
-    );
+    return User.fromSnapshot(fetchedUser);
   }
 
   static final CloudUsers _shared = CloudUsers._sharedInstance();
@@ -118,12 +119,12 @@ class CloudUsers {
     var userDocumentSnapshot = user.docs;
     if (userDocumentSnapshot.isNotEmpty) {
       var currentUser = User.fromSnapshot(userDocumentSnapshot.first);
-      final SharedPreferences _sharedPreference =
-          await SharedPreferences.getInstance();
-      // final map = toJSON(user: currentUser);
+      _sharedPreferences = await SharedPreferences.getInstance();
       final map = jsonEncode(toJSON(user: currentUser));
-      await _sharedPreference.setString(
-          userSharedPreferenceString, map.toString());
+      await _sharedPreferences.setString(
+        userSharedPreferenceString,
+        map,
+      );
       Navigator.of(context).pushNamedAndRemoveUntil(
         HomePageRoute,
         (_) => false,
@@ -134,13 +135,8 @@ class CloudUsers {
   }
 
   void logOut({required BuildContext context}) async {
-    var logger = Logger();
-    late final SharedPreferences _sharedPreferences;
-
     _sharedPreferences = await SharedPreferences.getInstance();
-    logger.d(
-      _sharedPreferences.setString(userSharedPreferenceString, 'null'),
-    );
+    _sharedPreferences.setString(userSharedPreferenceString, 'null');
     Navigator.of(context).pushNamedAndRemoveUntil(
       LoginPageRoute,
       (route) => false,

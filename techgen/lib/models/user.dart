@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:techgen/constants/dbConstants.dart';
 
 class User {
@@ -36,7 +35,7 @@ class User {
     required this.registeredEvents,
   });
 
-  User.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+  User.fromSnapshot(snapshot)
       : id = snapshot.id,
         firstName = snapshot.data()[firstNameUser],
         lastName = snapshot.data()[lastNameUser],
