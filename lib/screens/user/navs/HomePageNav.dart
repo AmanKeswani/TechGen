@@ -1,7 +1,6 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, import_of_legacy_library_into_null_safe
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_multi_carousel/carousel.dart';
 import 'package:techgen/constants/images.dart';
 
 class HomePageNav extends StatefulWidget {

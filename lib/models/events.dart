@@ -6,7 +6,7 @@ class Event {
   final String eventDescription;
   final String startDate;
   final String endDate;
-  final String eventBanner;
+  final String eventBannerId;
   final String redirectLink;
   final List<dynamic> participantList;
   final List<dynamic> teamList;
@@ -20,7 +20,7 @@ class Event {
     required this.eventDescription,
     required this.startDate,
     required this.endDate,
-    required this.eventBanner,
+    required this.eventBannerId,
     required this.redirectLink,
     required this.participantList,
     required this.teamList,
@@ -35,7 +35,7 @@ class Event {
         eventDescription = snapshot.data()[eventDescriptionEvent],
         startDate = snapshot.data()[startDateEvent],
         endDate = snapshot.data()[endDateEvent],
-        eventBanner = snapshot.data()[eventBannerEvent],
+        eventBannerId = snapshot.data()[eventBannerIdEvent],
         redirectLink = snapshot.data()[redirectLinkEvent],
         participantList = snapshot.data()[participantListEvent],
         teamList = snapshot.data()[teamListEvent],

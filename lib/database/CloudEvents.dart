@@ -23,7 +23,7 @@ class CloudEvents {
       eventDescriptionEvent: event.eventDescription,
       startDateEvent: event.startDate,
       endDateEvent: event.endDate,
-      eventBannerEvent: event.eventBanner,
+      eventBannerIdEvent: event.eventBannerId,
       redirectLinkEvent: event.redirectLink,
       participantListEvent: event.participantList,
       teamListEvent: event.teamList,

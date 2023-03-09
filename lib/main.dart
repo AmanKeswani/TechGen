@@ -9,6 +9,7 @@ import 'package:techgen/firebase_options.dart';
 import 'package:techgen/screens/SplashScreen.dart';
 import 'package:techgen/screens/auth/LoginPage.dart';
 import 'package:techgen/screens/auth/RegisterPageDetails.dart';
+import 'package:techgen/screens/user/EventsDetail.dart';
 import 'package:techgen/screens/user/HomePage.dart';
 
 void main() async {
@@ -22,6 +23,7 @@ void main() async {
         HomePageRoute: (context) => const HomePage(),
         LoginPageRoute: (context) => const LoginPage(),
         RegisterPageRoute: (context) => const RegisterPageDetails(),
+        EventDetailsPageRoute: (context) => const EventDetailsPage(),
       },
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
