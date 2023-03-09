@@ -10,7 +10,6 @@ import 'package:techgen/screens/SplashScreen.dart';
 import 'package:techgen/screens/auth/LoginPage.dart';
 import 'package:techgen/screens/auth/RegisterPageDetails.dart';
 import 'package:techgen/screens/user/HomePage.dart';
-import 'package:techgen/screens/user/UpcomingEventsNav.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

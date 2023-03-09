@@ -9,6 +9,7 @@ import 'package:techgen/models/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:techgen/screens/auth/auth_exceptions.dart';
 import 'package:techgen/utils/auth_validations.dart';
+import 'package:techgen/utils/text_boxes.dart';
 
 class RegisterPageDetails extends StatefulWidget {
   const RegisterPageDetails({super.key});
@@ -16,9 +17,6 @@ class RegisterPageDetails extends StatefulWidget {
   @override
   State<RegisterPageDetails> createState() => _RegisterPageDetailsState();
 }
-
-var _height;
-var _width;
 
 late TextEditingController _firstNameController;
 late TextEditingController _lastNameController;
@@ -32,6 +30,7 @@ late TextEditingController _phoneNumberController;
 late CloudUsers _usersInstance;
 
 class _RegisterPageDetailsState extends State<RegisterPageDetails> {
+  late TextBoxes tb;
   @override
   void initState() {
     // Controllers
@@ -46,6 +45,7 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
 
     _phoneNumberController.text = '+91';
     _usersInstance = CloudUsers();
+    tb = TextBoxes(context: context);
 
     super.initState();
   }
@@ -68,8 +68,6 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    _height = height;
-    _width = width;
 
     var nav = Navigator.of(context);
     return Scaffold(
@@ -113,42 +111,42 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
                     Row(
                       children: [
                         Flexible(
-                          child: _textBox(
+                          child: tb.detailsTextBox(
                             label: "First Name",
                             controller: _firstNameController,
                           ),
                         ),
                         Flexible(
-                          child: _textBox(
+                          child: tb.detailsTextBox(
                             label: "Last Name",
                             controller: _lastNameController,
                           ),
                         ),
                       ],
                     ),
-                    _textBox(
+                    tb.detailsTextBox(
                       label: "Email",
                       controller: _emailController,
                     ),
-                    _textBox(
+                    tb.detailsTextBox(
                       label: "Password",
                       obscureText: true,
                       controller: _passwordController,
                     ),
-                    _textBox(
+                    tb.detailsTextBox(
                       label: "Confirm Password",
                       obscureText: true,
                       controller: _confirmPasswordController,
                     ),
-                    _textBox(
+                    tb.detailsTextBox(
                       label: "College",
                       controller: _collegeController,
                     ),
-                    _textBox(
+                    tb.detailsTextBox(
                       label: "Course",
                       controller: _courseController,
                     ),
-                    _textBox(
+                    tb.detailsTextBox(
                       label: "Phone Number",
                       controller: _phoneNumberController,
                     ),
@@ -289,46 +287,4 @@ class _RegisterPageDetailsState extends State<RegisterPageDetails> {
       ),
     );
   }
-}
-
-Widget _textBox({
-  required TextEditingController controller,
-  obscureText = false,
-  required String label,
-}) {
-  return Padding(
-    padding: EdgeInsets.only(
-      left: _width * 0.05,
-      right: 10,
-      bottom: _height * 0.05,
-    ),
-    child: TextField(
-      controller: controller,
-      style: TextStyle(fontSize: 20),
-      scrollPadding: EdgeInsets.zero,
-      cursorHeight: 30,
-      obscureText: obscureText,
-      keyboardType: (label == "Phone Number")
-          ? TextInputType.number
-          : (label == "Email")
-              ? TextInputType.emailAddress
-              : TextInputType.text,
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        isDense: true,
-        contentPadding: EdgeInsets.only(
-          bottom: 7,
-          top: 5,
-        ),
-        label: Text(
-          label,
-          style: TextStyle(
-            color: tileColor,
-            fontSize: 15,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-      ),
-    ),
-  );
 }

@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:techgen/constants/colors.dart';
-import 'package:techgen/screens/user/HomePageNav.dart';
-import 'package:techgen/screens/user/ProfileNav.dart';
-import 'package:techgen/screens/user/UpcomingEventsNav.dart';
+import 'package:techgen/screens/user/navs/HomePageNav.dart';
+import 'package:techgen/screens/user/navs/profile/ProfileNav.dart';
+import 'package:techgen/screens/user/navs/UpcomingEventsNav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

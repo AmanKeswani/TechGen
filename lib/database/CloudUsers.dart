@@ -16,7 +16,9 @@ import 'package:techgen/utils/converters.dart';
 class CloudUsers {
   final users = FirebaseFirestore.instance.collection(usersCollection);
   var logger = Logger();
-  late final SharedPreferences _sharedPreferences;
+
+  SharedPreferences? _sharedPreferences;
+
   Future<void> deleteUser({
     required User user,
   }) async {
@@ -117,11 +119,17 @@ class CloudUsers {
   }) async {
     var user = await users.where(userNameUser, isEqualTo: username).get();
     var userDocumentSnapshot = user.docs;
+
     if (userDocumentSnapshot.isNotEmpty) {
       var currentUser = User.fromSnapshot(userDocumentSnapshot.first);
-      _sharedPreferences = await SharedPreferences.getInstance();
+      if (currentUser.password != password) {
+        Fluttertoast.showToast(msg: "Wrong Password");
+        return;
+      }
+
       final map = jsonEncode(toJSON(user: currentUser));
-      await _sharedPreferences.setString(
+      _sharedPreferences = await SharedPreferences.getInstance();
+      await _sharedPreferences!.setString(
         userSharedPreferenceString,
         map,
       );
@@ -136,7 +144,7 @@ class CloudUsers {
 
   void logOut({required BuildContext context}) async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    _sharedPreferences.setString(userSharedPreferenceString, 'null');
+    _sharedPreferences!.setString(userSharedPreferenceString, 'null');
     Navigator.of(context).pushNamedAndRemoveUntil(
       LoginPageRoute,
       (route) => false,

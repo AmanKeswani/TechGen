@@ -45,6 +45,8 @@ dependencies:
   fluttertoast: ^8.2.1
   shared_preferences: ^2.0.18
   logger: ^1.2.2
+  stacked_card_carousel: ^0.0.4
+  flutter_multi_carousel: ^1.0.3
 
 dev_dependencies:
   flutter_test:

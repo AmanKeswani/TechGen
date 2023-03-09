@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:techgen/constants/colors.dart';
+import 'package:techgen/database/CloudUsers.dart';
 
 class ProfileNav extends StatefulWidget {
   const ProfileNav({super.key});
@@ -13,6 +14,8 @@ class ProfileNav extends StatefulWidget {
 var _height;
 var _width;
 
+late CloudUsers _cloudUsers;
+
 class _ProfileNavState extends State<ProfileNav> {
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,8 @@ class _ProfileNavState extends State<ProfileNav> {
     _height = height;
     final width = MediaQuery.of(context).size.width;
     _width = width;
+
+    _cloudUsers = CloudUsers();
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -34,7 +39,7 @@ class _ProfileNavState extends State<ProfileNav> {
             child: Column(
               children: [
                 SizedBox(
-                  height: height * 0.07,
+                  height: height * 0.05,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -60,6 +65,7 @@ class _ProfileNavState extends State<ProfileNav> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
+                      color: textBoxColor,
                       width: 1,
                     ),
                     borderRadius: BorderRadius.all(
@@ -69,17 +75,13 @@ class _ProfileNavState extends State<ProfileNav> {
                   child: Column(
                     children: [
                       _item(
-                        icon: Icon(
-                          Icons.edit_document,
-                          size: 30,
-                        ),
-                        desc: 'Edit Document',
-                      ),
+                          icon: Icon(Icons.edit_document, size: 30),
+                          desc: 'Edit Profile'),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: height * 0.05,
+                  height: height * 0.03,
                 ),
                 Container(
                   padding: EdgeInsets.all(
@@ -89,6 +91,7 @@ class _ProfileNavState extends State<ProfileNav> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
+                      color: textBoxColor,
                       width: 1,
                     ),
                     borderRadius: BorderRadius.all(
@@ -98,10 +101,7 @@ class _ProfileNavState extends State<ProfileNav> {
                   child: Column(
                     children: [
                       _item(
-                          icon: Icon(
-                            Icons.diamond_outlined,
-                            size: 30,
-                          ),
+                          icon: Icon(Icons.diamond_outlined, size: 30),
                           desc: "My Diamonds"),
                       SizedBox(
                         height: height * 0.01,
@@ -124,7 +124,7 @@ class _ProfileNavState extends State<ProfileNav> {
                   ),
                 ),
                 SizedBox(
-                  height: height * 0.05,
+                  height: height * 0.03,
                 ),
                 Container(
                   padding: EdgeInsets.all(
@@ -134,6 +134,7 @@ class _ProfileNavState extends State<ProfileNav> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
+                      color: textBoxColor,
                       width: 1,
                     ),
                     borderRadius: BorderRadius.all(
@@ -142,6 +143,23 @@ class _ProfileNavState extends State<ProfileNav> {
                   ),
                   child: Column(
                     children: [
+                      _item(
+                        desc: 'My Team',
+                        icon: Icon(
+                          Icons.groups_2_rounded,
+                          size: 30,
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Divider(
+                        color: Colors.black,
+                        thickness: 1,
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
                       _item(
                         desc: 'My Friends',
                         icon: Icon(
@@ -183,6 +201,33 @@ class _ProfileNavState extends State<ProfileNav> {
                         ),
                         desc: "About App",
                       ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Divider(
+                        color: Colors.black,
+                        thickness: 1,
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              _cloudUsers.logOut(context: context);
+                            },
+                            child: Text(
+                              "Log Out",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -195,12 +240,12 @@ class _ProfileNavState extends State<ProfileNav> {
   }
 
   Widget _item({
-    required Icon icon,
+    Icon? icon,
     required String desc,
   }) {
     return Row(
       children: [
-        icon,
+        icon ?? SizedBox(),
         SizedBox(
           width: _width * 0.05,
         ),
