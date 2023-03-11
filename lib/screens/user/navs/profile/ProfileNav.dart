@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:techgen/constants/colors.dart';
+import 'package:techgen/constants/routes.dart';
 import 'package:techgen/database/CloudUsers.dart';
 
 class ProfileNav extends StatefulWidget {
@@ -74,9 +75,13 @@ class _ProfileNavState extends State<ProfileNav> {
                   ),
                   child: Column(
                     children: [
-                      _item(
-                          icon: Icon(Icons.edit_document, size: 30),
-                          desc: 'Edit Profile'),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context)
+                            .pushNamed(EditProfilePageRoute),
+                        child: _item(
+                            icon: Icon(Icons.edit_document, size: 30),
+                            desc: 'Edit Profile'),
+                      ),
                     ],
                   ),
                 ),

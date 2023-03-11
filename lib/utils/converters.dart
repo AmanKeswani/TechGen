@@ -22,7 +22,7 @@ Map<String, Object> toJSON({
       registeredEventsUser.toString(): user.registeredEvents,
     };
 
-userToObject(Map<String, dynamic> userJSON) => User(
+toObject(Map<String, dynamic> userJSON) => User(
       admin: userJSON[adminUser] as bool,
       collegeName: userJSON[collegeNameUser] as String,
       diamonds: userJSON[diamondUser] as int,

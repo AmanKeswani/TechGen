@@ -7,8 +7,7 @@ final event = Event(
   adminList: [],
   endDate: 'EndDate',
   eventBannerId: '1C3075dpF5IXwhCWYSV2jwbgE8ObYcQtI',
-  eventDescription: """Event description: Hello, this is a demo ssxs
-description for the event taking place. sxsscssaxsajsxjsnxsn xsjxjsxjk sjsjsis skssksj jsjxxsiuxnsx xsixjsisjxsioxkjosxsdsdsdsdsdsd xskjxosxkoskxs sxnsxnksmxsmxsxsjxosxjosxj""",
+  eventDescription: """""",
   eventName: 'Name',
   headList: [],
   id: '0',
@@ -28,9 +27,8 @@ Widget eventCard({
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
   return GestureDetector(
-    onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+    onTap: () => Navigator.of(context).pushNamed(
       EventDetailsPageRoute,
-      (_) => false,
       arguments: event,
     ),
     child: Container(

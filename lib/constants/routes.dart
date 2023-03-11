@@ -4,3 +4,4 @@ const String HomePageRoute = '/HomePage/';
 const String LoginPageRoute = '/LoginPage/';
 const String RegisterPageRoute = '/RegisterPage/';
 const String EventDetailsPageRoute = '/EventDetails/';
+const String EditProfilePageRoute = '/EditProfile/';

@@ -1,7 +1,7 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:techgen/constants/colors.dart';
 import 'package:techgen/constants/images.dart';
 import 'package:techgen/models/events.dart';
@@ -14,27 +14,23 @@ class EventDetailsPage extends StatefulWidget {
 }
 
 class _EventDetailsPageState extends State<EventDetailsPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  double? _height;
+  double? _width;
 
   @override
   Widget build(BuildContext context) {
     final Event event = ModalRoute.of(context)?.settings.arguments as Event;
 
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
-        appBar: eventAppBar(event: event),
+        appBar: eventAppBar(title: event.eventName),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             eventImage(
-              height: height,
-              width: width,
               event: event,
             ),
             participantCount(
@@ -47,23 +43,57 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 height: double.infinity,
               ),
             ),
-            registerButton(width)
+            registerButtonBottomSheet()
           ],
         ),
       ),
     );
   }
 
-  Container registerButton(double width) {
+  Widget registerButtonBottomSheet() {
     return Container(
       margin: EdgeInsets.all(20),
-      width: width * 0.3,
+      width: _width! * 0.3,
       decoration: BoxDecoration(
         color: titleColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () => showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) => Container(
+            height: _height! * 0.4,
+            width: _width,
+            decoration: BoxDecoration(
+              color: tileColor,
+            ),
+            child: Column(
+              children: [
+                button(
+                  text: "Register Individually",
+                  onPressed: () {
+                    Fluttertoast.showToast(
+                        msg: 'Registered. Add procedure here');
+                  },
+                ),
+                dividerBottomSheet(),
+                button(
+                  text: "Join an existing Team",
+                  onPressed: () {
+                    Fluttertoast.showToast(msg: 'Add procedure here');
+                  },
+                ),
+                dividerBottomSheet(),
+                button(
+                  text: "Create a new Team",
+                  onPressed: () {
+                    Fluttertoast.showToast(msg: 'Add procedure here');
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
         child: Text(
           "Register",
           style: TextStyle(
@@ -75,7 +105,58 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
-  Padding eventDescription(Event event) {
+  Padding dividerBottomSheet() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+                margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                child: Divider(
+                  color: Colors.black,
+                  height: 36,
+                )),
+          ),
+          Text("OR"),
+          Expanded(
+            child: Container(
+                margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                child: Divider(
+                  color: Colors.black,
+                  height: 36,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget button({
+    required String text,
+    required Function() onPressed,
+  }) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      width: _width! * 0.7,
+      decoration: BoxDecoration(
+        color: titleColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget eventDescription(Event event) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Align(
@@ -91,19 +172,26 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
-  AppBar eventAppBar({required Event event}) {
+  AppBar eventAppBar({
+    required String title,
+  }) {
     return AppBar(
       title: Text(
-        event.eventName,
+        title,
         style: TextStyle(
           color: titleColor,
           fontSize: 30,
         ),
       ),
-      leading: Icon(
-        Icons.arrow_back_ios_new_rounded,
-        color: Colors.black,
-        size: 30,
+      leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back_ios_new_rounded,
+          size: 30,
+          color: Colors.grey,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       centerTitle: true,
       backgroundColor: Colors.white,
@@ -111,9 +199,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
-  Container eventImage({
-    required double height,
-    required double width,
+  Widget eventImage({
     required Event event,
   }) {
     return Container(
@@ -121,8 +207,8 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         horizontal: 10,
         vertical: 10,
       ),
-      height: height * 0.25,
-      width: width,
+      height: _height! * 0.25,
+      width: _width!,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(20),
@@ -137,7 +223,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
-  Align participantCount({
+  Widget participantCount({
     required int pCount,
     required int tCount,
   }) {
